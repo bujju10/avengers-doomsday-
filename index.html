@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking Portal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: sienna;
+            font-family: sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- Section 1: Hover Panels & Logo --- */
+        .First {
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background Image (Avengers Doomsday) */
+        .Fmain {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .F4 {
+            position: absolute;
+            top: 2vh;
+            left: 2vw;
+            z-index: 10; /* Keeps logo on top */
+        }
+
+        .Box1 {
+            overflow: hidden;
+            transition: 1.5s all ease-in-out;
+        }
+
+        .Box1 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Left Panel: Thor */
+        .F1 {
+            width: 44vw;
+            height: 100vh;
+            background-color: blue;
+            position: absolute;
+            top: 0vh;
+            left: -10vw;
+            z-index: 3; /* Kept above Doctor Strange so he starts hidden behind them */
+        }
+
+        /* Right Panel: Captain America */
+        .F3 {
+            width: 44vw;
+            height: 100vh;
+            background-color: yellow;
+            position: absolute;
+            right: -10vw;
+            top: 0vh;
+            z-index: 3; /* Kept above Doctor Strange */
+        }
+
+        /* Hover effect: Shrink side panels to reveal the middle */
+        .First:hover .F1, .First:hover .F3 {
+            width: 28vw;
+        }
+
+        /* --- Middle Panel: Doctor Strange --- */
+        .doctor-panel {
+            position: absolute;
+            top: 0;
+            left: 18vw;  /* Positions him exactly in the gap that opens */
+            width: 64vw; /* Fills the exact width between Thor and Cap when open */
+            height: 100vh;
+            z-index: 2; /* Sits above the Doomsday background, but below Thor/Cap doors */
+            transition: 1.5s all ease-in-out;
+            
+            /* He STARTS in the middle */
+            transform: translateY(0); 
+        }
+
+        .doctor-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%; 
+        }
+
+        /* When container is hovered, Doctor Strange slides UP and out of the way, revealing the background */
+        .First:hover .doctor-panel {
+            transform: translateY(-100vh);
+        }
+
+        /* --- Section 2: Zooming Background & Booking Form --- */
+        .Second {
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .Second > img {
+            transition: all 3s ease-in-out;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .Second:hover > img {
+            transform: scale(1.3);
+        }
+
+        .S1 {
+            position: absolute;
+            left: 25vw;
+            top: 15vh;
+            width: 50vw;
+            height: 70vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            color: rgb(255, 255, 255);
+            z-index: 2;
+        }
+        
+        .S1 h2 {
+            font-size: xx-large;
+            margin-bottom: 2vh;
+            text-align: center;
+        }
+
+        .S1 form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .S1 input {
+            display: block;
+            width: 30vw;
+            height: 5vh;
+            margin-bottom: 2.5vh;
+            border-radius: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(192, 192, 192, 0.5);
+            color: white;
+            font-size: 16px;
+            padding-left: 1vw;
+        }
+
+        .S1 button {
+            width: 30vw;
+            height: 6vh;
+            margin-top: 1vh;
+            background-color: rgba(2, 62, 12, 0.7);
+            color: ghostwhite;
+            font-size: large;
+            border-radius: 20px;
+            border: 2px solid rgba(192, 192, 192, 0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .S1 button:hover {
+            background-color: rgba(2, 62, 12, 0.9);
+        }
+
+        ::placeholder {
+            font-size: medium;
+            color: ghostwhite;
+            padding-left: 1vw;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: Hover Interaction Panels -->
+    <div class="First">
+        <div class="F4">
+            <img src="https://sportshub.cbsistatic.com/i/2021/09/11/cd5d12d5-8561-40a6-bc4b-84f663d37934/marvel-studios-logo.png" alt="Marvel Studios Logo" width="120">
+        </div>
+        
+        <!-- Doomsday Background -->
+        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e81c3666-def3-4919-86b8-6e673b87031d/dlemaci-d411e827-f8f4-45ed-96bf-c8a5b27ba586.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9lODFjMzY2Ni1kZWYzLTQ5MTktODZiOC02ZTY3M2I4NzAzMWQvZGxlbWFjaS1kNDExZTgyNy1mOGY0LTQ1ZWQtOTZiZi1jOGE1YjI3YmE1ODYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.KbfaTPqICiNvQA0zat65bzR1ggAH4FXncpKMgD_SWlg" alt="" class="Fmain">
+        
+        <!-- Left Panel: Thor -->
+        <div class="F1 Box1">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmnFg2d5zNXmDnDHCHnEmk9DKtChMLBGgPf9ie8KfjRA&s=10" alt="Thor Panel">
+        </div> 
+        
+        <!-- Middle Panel: Doctor Strange -->
+        <div class="doctor-panel">
+            <img src="https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_FMjpg_UX1000_.jpg" alt="Doctor Strange">
+        </div>
+        
+        <!-- Right Panel: Captain America -->
+        <div class="F3 Box1">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0asII07ewGyV735cwKQ_w4uz2bpfgjKN-f3hiRLXBzA&s=10" alt="Captain America Panel">
+        </div>  
+    </div>
+
+    <!-- Section 2: Ticket Booking Form Overlay -->
+    <div class="Second">
+        <img src="https://www.wallsnapy.com/img_gallery/doctor-doom-cracked-face-mask-green-runes-uhd-wallpaper-776052.jpg" alt="Doctor Doom Background">
+        
+        <div class="S1">
+            <h2>Book Your Tickets here</h2> 
+            <form action="/book" method="POST">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+                <input type="date" name="date" required>
+                <input type="number" name="tickets" placeholder="Number of Tickets" min="1" required>
+                <button type="submit">Submit</button>
+            </form>   
+        </div>
+    </div>
+
+</body>
+</html>
